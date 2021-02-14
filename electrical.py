@@ -16,7 +16,7 @@ class Electrical:
 		self.baudrate = baudrate
 		self.pinout_filename = "pinout.json"
 
-		self.serial = serial.Serial(baudrate=self.baudrate)
+		self.serial = serial.Serial(port="COM8", baudrate=self.baudrate)
 
 		if len(self.data) > 0:
 			self.save(self.pinout_filename)
@@ -31,7 +31,8 @@ class Electrical:
 	def set(self, name, value):
 
 		data = f"{self.data[name]}&{value}"
-		self.serial.write(data)
+		print(data)
+		self.serial.write(data.encode())
 
 
 	# Receiving the current pin connected to the name.
